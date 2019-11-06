@@ -4,7 +4,7 @@
   "description": "server for collection sensor data",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon ./bin/www",
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,6 +24,7 @@
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
+    "mongoose": "^5.7.7",
     "morgan": "^1.9.1",
     "pug": "^2.0.4",
     "serve-favicon": "^2.5.0"
