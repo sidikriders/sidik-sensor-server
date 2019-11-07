@@ -8,7 +8,7 @@ const Area = Model('Area', new Schema({
 }))
 
 const Sensor = Model('Sensor', new Schema({
-  name: { type: String, unique: true, required: true },
+  name: { type: String, required: true },
   area: { type: Schema.Types.ObjectId, ref: 'Area' }
 }))
 
