@@ -16,6 +16,7 @@ router.get('/:sensorId', async (req, res, next) => {
   }
 })
 
+// CREATE DATA SENSOR PER SENSOR ID
 router.post('/:sensorId', async (req, res, next) => {
   try {
     let _sensor = await Sensor.findById(req.params.sensorId)
@@ -44,6 +45,28 @@ router.post('/:sensorId', async (req, res, next) => {
   } catch (error) {
     next(error)
   }
+})
+
+// GET ALL DATA IN LATEST TWO WEEK
+router.get('/summary/:sensorId', (req, res, next) => {
+  let lastTwoWeeks = new Date().setDate(new Date().getDate() - 14)
+
+  DataSensor.find({ sensor: req.params.sensorId, date: {
+    $gte: new Date(lastTwoWeeks)
+  }}, 'value unit date').then(datas => {
+    let data = datas.map(({ unit, value, date }) => {
+      let wibDate = new Date(date).toLocaleString()
+      return {
+        unit,
+        value,
+        date: wibDate
+      }
+    })
+    res.send({
+      status: true,
+      data
+    })
+  }).catch(err => next(err))
 })
 
 module.exports = router
